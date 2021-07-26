@@ -76,8 +76,6 @@ router.post('/', (request, response) => {
             });
      
     }
-
-    account/sold
     
     let intents = new Map();
     intents.set('TestBackend', backend);

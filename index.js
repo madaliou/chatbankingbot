@@ -7,9 +7,9 @@ const config = require("./server/config/keys");
 const mongoose = require("mongoose");
 //const { request, response } = require("express");
 
-mongoose.connect(config.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+/* mongoose.connect(config.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB Connected...'))
-  .catch(err => console.log(err));
+  .catch(err => console.log(err)); */
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
