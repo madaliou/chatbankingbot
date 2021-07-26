@@ -3,7 +3,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const app = express();
 
-const config = require("./server/config/keys");
+//const config = require("./server/config/keys");
 const mongoose = require("mongoose");
 //const { request, response } = require("express");
 
@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-app.use('/api/dialogflow', require('./server/routes/dialogflow'));
+//app.use('/api/dialogflow', require('./server/routes/dialogflow'));
 
 app.use('/webhook', require('./server/routes/webhook'))
 
