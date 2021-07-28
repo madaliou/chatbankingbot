@@ -4,7 +4,7 @@
   "description": "chatbot-app",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon index.js",
     "backend": "nodemon index.js",
     "frontend": "npm run front --prefix client",
     "dev": "concurrently \"npm run backend\"  \"npm run start --prefix client\""

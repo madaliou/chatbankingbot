@@ -12,7 +12,7 @@ const { Pizza } = require('../models/Pizza.js');
 
 const {WebhookClient} = require('dialogflow-fulfillment');
 
-const bankAPI = "https://bb4027aacbf3.ngrok.io/api";
+const bankAPI = "https://bank70.herokuapp.com/api";
 
 
 router.post('/', (request, response) => {
@@ -38,19 +38,22 @@ router.post('/', (request, response) => {
       const sender_account_number = request.body.queryResult.parameters.fromAccount;
       const amount = request.body.queryResult.parameters.amount;
       const ext_bank_name = request.body.queryResult.parameters.bankName;    
+      const email = request.body.queryResult.parameters.email;    
+      const password = request.body.queryResult.parameters.password;    
 
-      await axios.post(`${bankAPI}/account/externTransfert`, {receiver_account_number, sender_account_number, amount, ext_bank_name})
+
+      await axios.post(`${bankAPI}/account/externTransfert`, {receiver_account_number, sender_account_number, amount, ext_bank_name, email, password})
             .then(resp => {
-                console.log('cool : ', resp.data);
+                //console.log('cool : ', resp.data);
                 /* if (resp.status === 200) {
                     result.data = resp.data;
                 } */
-                agent.add('Transfert Done');
+                agent.add('The Transfert is Done successfully');
             })
             .catch(err => {
                 console.log('pas cool : ', err);
                 
-                agent.add('Error');
+                agent.add('An error occured');
             });
      
     }
