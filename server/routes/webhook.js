@@ -31,6 +31,24 @@ router.post('/', (request, response) => {
       agent.add(`Bienvenue je suis le chatbankBot depuis la Banque A!`);
     }
 
+    const create_account = async ( agent) => {
+        
+        //const {receiver_account_number, sender_account_number, amount, ext_bank_name} = request.body.queryResult.parameters;
+        const {firstname, lastname, type, phone, birthdate, bith_place, email, password} = request.body.queryResult.parameters;
+        
+        await axios.post(`${bankAPI}/register`, {firstname, lastname, type, phone, birthdate, bith_place, email, password})
+              .then(resp => {
+                  
+                  agent.add(`Account created successfully`);
+              })
+              .catch(err => {
+                  console.log('pas cool : ', err);
+                  
+                  agent.add( err.response.data.message ? `${err.response.data.message}` : 'An error occured!!');
+              });
+       
+      }
+
     const transfert = async ( agent) => {
       //console.log('request.body.queryResult.parameters', request.body.queryResult.parameters);
       //const {receiver_account_number, sender_account_number, amount, ext_bank_name} = request.body.queryResult.parameters;
@@ -63,8 +81,6 @@ router.post('/', (request, response) => {
       //const {receiver_account_number, sender_account_number, amount, ext_bank_name} = request.body.queryResult.parameters;
       const {account_number, email, password} = request.body.queryResult.parameters;
       
-        
-
       await axios.post(`${bankAPI}/account/sold`, {account_number, email, password})
             .then(resp => {
                 console.log('cool : ', resp.data);
@@ -111,7 +127,9 @@ router.post('/', (request, response) => {
     intents.set('chatbank', chatbank);
     intents.set('transfert', transfert);
     intents.set('get-my-solde', balance);
-    intents.set('credit-account', credit_account);    
+    intents.set('credit-account', credit_account);   
+    intents.set('create-account', create_account);    
+ 
 
     _agent.handleRequest(intents);
 });
