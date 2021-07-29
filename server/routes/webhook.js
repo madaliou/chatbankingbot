@@ -34,9 +34,9 @@ router.post('/', (request, response) => {
     const create_account = async ( agent) => {
         
         //const {receiver_account_number, sender_account_number, amount, ext_bank_name} = request.body.queryResult.parameters;
-        const {firstname, lastname, type, phone, birthdate, bith_place, email, password} = request.body.queryResult.parameters;
+        const {firstname, lastname, type, phone, birthdate, birth_place, email, password} = request.body.queryResult.parameters;
         
-        await axios.post(`${bankAPI}/register`, {firstname, lastname, type, phone, birthdate, bith_place, email, password})
+        await axios.post(`${bankAPI}/register`, {firstname, lastname, type, phone, birthdate, birth_place, email, password})
               .then(resp => {
                   
                   agent.add(`Account created successfully`);
@@ -62,11 +62,8 @@ router.post('/', (request, response) => {
 
       await axios.post(`${bankAPI}/account/externTransfert`, {receiver_account_number, sender_account_number, amount, ext_bank_name, email, password})
             .then(resp => {
-                //console.log('cool : ', resp.data);
-                /* if (resp.status === 200) {
-                    result.data = resp.data;
-                } */
-                agent.add('The Transfert is Done successfully');
+                console.log('cool : ', resp.data);
+                agent.add('The Transfert is done successfully');
             })
             .catch(err => {
                 console.log('pas cool : ', err.response);
