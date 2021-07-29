@@ -61,16 +61,17 @@ router.post('/', (request, response) => {
     const balance = async ( agent) => {
       console.log('request.body.queryResult.parameters', request.body.queryResult.parameters);
       //const {receiver_account_number, sender_account_number, amount, ext_bank_name} = request.body.queryResult.parameters;
-      const receiver_account_number = request.body.queryResult.parameters.balance;
+      const {account_number, email, password} = request.body.queryResult.parameters;
+      
         
 
-      await axios.post(`${bankAPI}/account/sold`, {receiver_account_number, sender_account_number, amount, ext_bank_name})
+      await axios.post(`${bankAPI}/account/sold`, {account_number, email, password})
             .then(resp => {
                 console.log('cool : ', resp.data);
                 /* if (resp.status === 200) {
                     result.data = resp.data;
                 } */
-                agent.add('Transfert Done');
+                agent.add('Your account balance is Done', resp.data);
             })
             .catch(err => {
                 console.log('pas cool : ', err);
