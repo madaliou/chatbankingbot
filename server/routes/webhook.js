@@ -38,8 +38,10 @@ router.post('/', (request, response) => {
         
         await axios.post(`${bankAPI}/register`, {firstname, lastname, type, phone, birthdate, birth_place, email, password})
               .then(resp => {
+
+                agent.add(`Account created successfully, Your account number is ${resp.data.account.account_number}`);
                   
-                  agent.add(`Account created successfully`);
+                //agent.add(`Account created successfully`);
               })
               .catch(err => {
                   console.log('pas cool : ', err);
