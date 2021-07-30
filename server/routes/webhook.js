@@ -33,10 +33,11 @@ router.post('/', (request, response) => {
 
     const create_account = async ( agent) => {
         
+        
         //const {receiver_account_number, sender_account_number, amount, ext_bank_name} = request.body.queryResult.parameters;
         const {firstname, lastname, type, phone, birthdate, birth_place, email, password} = request.body.queryResult.parameters;
         
-        await axios.post(`${bankAPI}/register`, {firstname, lastname, type, phone, birthdate, birth_place, email, password})
+        await axios.post(`${bankAPI}/register`, {firstname, lastname, type, phone, birthdate, birth_place, email, password, sold:0})
               .then(resp => {
 
                 agent.add(`Account created successfully, Your account number is ${resp.data.account.account_number}`);
